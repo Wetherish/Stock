@@ -13,13 +13,25 @@ const OrderType = enum {
 };
 
 const Order = struct {
-    id: u32,
+    orderID: u64,
+    ownerID: u64,
+    stockID: u64,
+    price: u64,
+    volume: u64,
+
     orderType: OrderType,
 
-    pub fn init(id: u32, orderType: OrderType) Order {
+    timestamp: i64,
+
+    pub fn init(id: u32, owner: u64, stock: u64, price: u64, volume: u64, orderType: OrderType) Order {
         return Order{
-            .id = id,
+            .orderID = id,
+            .ownerID = owner,
+            .stockID = stock,
+            .price = price,
+            .volume = volume,
             .orderType = orderType,
+            .timestamp = std.time.milliTimestamp(),
         };
     }
 
