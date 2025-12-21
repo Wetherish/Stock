@@ -79,6 +79,7 @@ pub fn build(b: *std.Build) void {
                 // can be extremely useful in case of collisions (which can happen
                 // importing modules from different packages).
                 .{ .name = "client", .module = mod },
+                .{ .name = "network", .module = b.dependency("network", .{}).module("network") },
             },
         }),
     });

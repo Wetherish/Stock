@@ -1,6 +1,6 @@
 const std = @import("std");
 
-const OrderType = enum {
+pub const OrderType = enum {
     buy,
     sell,
 
@@ -12,7 +12,7 @@ const OrderType = enum {
     }
 };
 
-const Order = struct {
+pub const Order = struct {
     id: u32,
     orderType: OrderType,
 

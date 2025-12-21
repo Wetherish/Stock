@@ -1,8 +1,11 @@
 const std = @import("std");
 const client = @import("client");
+const Order = @import("network").models.order.Order;
 
 pub fn main() !void {
-    // Prints to stderr, ignoring potential errors.
+    const order = Order.init(1, .buy);
+    order.draw();
+
     std.debug.print("All your {s} are belong to us.\n", .{"codebase"});
     try client.bufferedPrint();
 }
