@@ -6,3 +6,5 @@ edition = "2024"
 [dependencies]
 tokio = { version = "1.48.0", features = ["full"] }
 tokio-stream = "0.1"
+common = { path = "../common" }
+tonic = "0.14.2"

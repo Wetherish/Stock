@@ -1,12 +1,18 @@
-use tokio::{io::AsyncReadExt, io::AsyncWriteExt, net::TcpStream};
+use common::order::HelloRequest;
+
+use common::order::greeter_client::GreeterClient;
 
 #[tokio::main]
-async fn main() {
-    let mut stream = TcpStream::connect("127.0.0.1:8080")
-        .await
-        .expect("Failed to connect to server");
-    stream.write("hello".as_bytes()).await.unwrap();
-    let mut input_buffer = [0; 1024];
-    stream.read(&mut input_buffer).await.unwrap();
-    println!("{}", String::from_utf8_lossy(&input_buffer));
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let mut client = GreeterClient::connect("http://[::1]:50051").await?;
+
+    let request = tonic::Request::new(HelloRequest {
+        name: "Tonic".into(),
+    });
+
+    let response = client.say_hello(request).await?;
+
+    println!("RESPONSE={response:?}");
+
+    Ok(())
 }
